@@ -32,7 +32,6 @@ function calculateSVGScale(svg) {
 	if (!svg.viewBox.animVal)svg.scaleRatios = [1,1]; // No viewBox
 	else {
 		let info = getComputedStyle(svg);
-		console.log("computed svg style", info);
 		let w1=svg.viewBox.animVal.width, h1=svg.viewBox.animVal.height;//viewbox == grid system 1.
 		let w2=parseFloat(info.width), h2=parseFloat(info.height);//actual svg box == grid system 2.
 		let par=svg.preserveAspectRatio.animVal;
