@@ -40,11 +40,11 @@ function calculateSVGScale(svg) {
 		} else {
 			let meet = par.meetOrSlice === SVGPreserveAspectRatio.SVG_MEETORSLICE_MEET;
 			// if preserving AR (aspect ratio), one dimension will be cut off, and the other will be scaled to fit: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio#Example
-			// the scaling ratio we will apply to BOTH dimensions has to be the ratio of one of the dimensions (viewbox:svg's DOM box) in order to preserve the aspect ratio.
-			// meet/meet==true: scale the image to fit inside the svg rect. (The edges of the viewbox meet the edges of the viewport)
-			// slice/meet==false: slice off the excess to make the svg rect be fully drawn-in. (The edges of the viewbox outside the viewport are sliced off).
+			// the scaling ratio we will apply to BOTH dimensions has to be the ratio of one of the dimensions (svg's DOM box(viewport):viewbox) in order to preserve the aspect ratio.
+			// meet(meet==true): scale the image to fit inside the svg rect. (The edges of the viewbox meet the edges of the viewport)
+			// slice(meet==false): slice off the excess to make the svg rect be fully drawn-in. (The edges of the viewbox outside the viewport are sliced off).
 			//Human version of line below:
-			//if ((viewbox AR wider than svg rect AR) && slicing off excess height) || ((viewbox AR narrower than svg rect AR) && zoom to fit) ? scale heights to match : scale widths.
+			//if ((viewbox AR wider than svg rect AR) && slicing off excess width) || ((viewbox AR narrower than svg rect AR) && zoom to fit) ? scale based on ratio of heights : scale widths.
 			let ratio = (w1/h1 > w2/h2) != meet ? h2/h1 : w2/w1;//some extreme cleverness going on here (see above).
 			svg.scaleRatios = [ratio, ratio];
 		}
